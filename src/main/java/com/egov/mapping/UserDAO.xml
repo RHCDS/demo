@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.egov.dao.UserDAO"><!-- 对应dao层的接口 -->
+	<resultMap id="UserResultMap" type="com.egov.model.User">
+		<id property="id" column="id" />
+		<result property="user_name" column="user_name" />
+		<result property="password" column="password" />
+		<result property="age" column="age" />
+	</resultMap>
+	
+	
+	<insert id="intsertUser" parameterType="com.egov.model.User" useGeneratedKeys="true" keyProperty="id">
+		insert into user_t(user_name,password,age)
+		values (#{user_name},#{password},#{age})
+	</insert>
+
+	<select id="selectUserByUsernamePassword" resultMap="UserResultMap">
+		select *
+		from user_t where user_name=#{0} and password=#{1}
+	</select>
+	<select id="selectUserById" resultMap="UserResultMap">
+		select *
+		from user_t where id=#{0}
+	</select>
+	<select id="selectUserByFull" resultMap="UserResultMap">
+		select *
+		from user_t where user_name=#{0} and password=#{1} and age=#{2}
+	</select>
+	
+	<select id="selectUserByUsernameAndPassword" resultMap="UserResultMap">
+	select *
+		from user_t where user_name=#{0} and password=#{1}
+	</select>
+	
+</mapper>

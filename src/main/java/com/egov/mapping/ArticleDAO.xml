@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.egov.dao.ArticleDAO" ><!-- 对应dao层的接口 -->
+	<resultMap id="ArticleResultMap" type="com.egov.model.Article" >
+		<id property="id" column="id" />
+		<result property="uid" column="uid" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+	</resultMap>
+
+	
+	<insert id="publishArticle" parameterType="com.egov.model.Article" useGeneratedKeys="true" keyProperty="id">
+		insert into article(title,content)
+		values (#{title},#{content})
+	</insert>
+
+	<select id="selectArticleByTitle" resultMap="ArticleResultMap">
+		select *
+		from article where title=#{0}
+	</select>
+
+</mapper>
